@@ -1,4 +1,4 @@
-FROM gcc:11.1.0
+FROM ubuntu:bionic
 
 ARG SRSRAN_VERSION=21_04_pre
 
@@ -6,21 +6,29 @@ ARG LIBZMQ_VERSION=4.3.4
 
 ARG CZMQ_VERSION=4.2.1
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt update && \
     apt install -y \
-      cmake \
-      fftw3-dev \
-      libuhd-dev \
-      libsctp-dev \
-      libzmq3-dev \
-      libboost-dev \
-      libmbedtls-dev \
-      libbladerf-dev \
-      libpcsclite-dev \
-      libsoapysdr-dev \
-      libconfig++-dev
+        build-essential \
+        cmake \
+        unzip \
+        libfftw3-dev \
+        libmbedtls-dev \
+        libpcsclite-dev \
+        libboost-program-options-dev \
+        libconfig++-dev \
+        libsctp-dev libczmq-dev \
+        libpcsclite-dev \
+        rapidjson-dev \
+        colordiff \
+        ninja-build \
+        clang-format-8 \
+        libtool-bin \
+        autoconf && \
+    rm -rf /var/lib/apt/lists/*
 
-WORKDIR /tmp
+WORKDIR /srsran
 
 ADD https://github.com/srsran/srsRAN/archive/refs/tags/release_${SRSRAN_VERSION}.zip .
 
@@ -33,7 +41,7 @@ RUN unzip release_${SRSRAN_VERSION}.zip && \
     unzip v${CZMQ_VERSION}.zip && \
     rm *.zip
 
-WORKDIR /tmp/libzmq-${LIBZMQ_VERSION}
+WORKDIR /srsran/libzmq-${LIBZMQ_VERSION}
 
 RUN ./autogen.sh && \
     ./configure && \
@@ -41,7 +49,7 @@ RUN ./autogen.sh && \
     make install && \
     ldconfig
 
-WORKDIR /tmp/czmq-${CZMQ_VERSION}
+WORKDIR /srsran/czmq-${CZMQ_VERSION}
 
 RUN ./autogen.sh && \
     ./configure && \
@@ -49,9 +57,8 @@ RUN ./autogen.sh && \
     make install && \
     ldconfig
 
-WORKDIR /tmp/srsRAN-release_${SRSRAN_VERSION}/build
+WORKDIR /srsran/srsRAN-release_${SRSRAN_VERSION}/build
 
-RUN cmake ..
-# RUN cmake .. && \
-#     make
-
+RUN cmake .. && \
+    make && \
+    ldconfig
