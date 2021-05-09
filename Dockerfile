@@ -25,8 +25,8 @@ RUN apt update && \
         ninja-build \
         clang-format-8 \
         libtool-bin \
-        autoconf && \
-    rm -rf /var/lib/apt/lists/*
+        autoconf \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srsran
 
@@ -62,3 +62,19 @@ WORKDIR /srsran/srsRAN-release_${SRSRAN_VERSION}/build
 RUN cmake .. && \
     make && \
     ldconfig
+
+RUN mv ./srsenb/src/srsenb \
+       ./srsepc/src/srsepc \
+       ./srsepc/src/srsmbms \
+       ./srsue/src/srsue \
+    /usr/local/bin
+
+WORKDIR /srsran/srsRAN-release_${SRSRAN_VERSION}
+
+RUN mkdir -p /etc/srsran
+
+RUN find . -type f -name '*.example' -exec \
+    bash -c 'x={}; y=${x##*/}; z=${y%.example}; \
+    cp {} /etc/srsran/${z}' \;
+
+WORKDIR /etc/srsran
