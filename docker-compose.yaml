@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  srsenb:
+    image: shubhamtatvamasi/srsran-demo
+    container_name: srsenb
+    networks:
+      srs_net:
+        ipv4_address: 172.50.50.10
+    command:
+      - sleep
+      - infinity
+
+  srsue:
+    image: shubhamtatvamasi/srsran-demo
+    container_name: srsue
+    depends_on: 
+      - srsenb
+    networks:
+      srs_net:
+        ipv4_address: 172.50.50.11
+    command:
+      - sleep
+      - infinity
+
+networks:
+  srs_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.50.50.0/24"
