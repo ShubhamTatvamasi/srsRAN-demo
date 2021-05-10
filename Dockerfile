@@ -15,6 +15,9 @@ RUN apt update && \
         unzip \
         wget \
         curl \
+        iptables \
+        iproute2 \
+        iputils-ping \
         libfftw3-dev \
         libmbedtls-dev \
         libpcsclite-dev \
