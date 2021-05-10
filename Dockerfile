@@ -71,10 +71,8 @@ RUN cmake .. && \
        ./srsue/src/srsue \
     /usr/local/bin
 
-WORKDIR /srsran/srsRAN-release_${SRSRAN_VERSION}
-
 RUN mkdir -p /etc/srsran && \
-    find . -type f -name '*.example' -exec \
+    find .. -type f -name '*.example' -exec \
     bash -c 'x={}; y=${x##*/}; z=${y%.example}; \
     cp {} /etc/srsran/${z}' \;
 
