@@ -13,6 +13,8 @@ RUN apt update && \
         build-essential \
         cmake \
         unzip \
+        wget \
+        curl \
         libfftw3-dev \
         libmbedtls-dev \
         libpcsclite-dev \
@@ -30,13 +32,10 @@ RUN apt update && \
 
 WORKDIR /srsran
 
-ADD https://github.com/srsran/srsRAN/archive/refs/tags/release_${SRSRAN_VERSION}.zip .
-
-ADD https://github.com/zeromq/libzmq/archive/refs/tags/v${LIBZMQ_VERSION}.zip .
-
-ADD https://github.com/zeromq/czmq/archive/refs/tags/v${CZMQ_VERSION}.zip .
-
-RUN unzip release_${SRSRAN_VERSION}.zip && \
+RUN wget https://github.com/srsran/srsRAN/archive/refs/tags/release_${SRSRAN_VERSION}.zip && \
+    wget https://github.com/zeromq/libzmq/archive/refs/tags/v${LIBZMQ_VERSION}.zip && \
+    wget https://github.com/zeromq/czmq/archive/refs/tags/v${CZMQ_VERSION}.zip && \
+    unzip release_${SRSRAN_VERSION}.zip && \
     unzip v${LIBZMQ_VERSION}.zip && \
     unzip v${CZMQ_VERSION}.zip && \
     rm *.zip
@@ -61,9 +60,8 @@ WORKDIR /srsran/srsRAN-release_${SRSRAN_VERSION}/build
 
 RUN cmake .. && \
     make && \
-    ldconfig
-
-RUN mv ./srsenb/src/srsenb \
+    ldconfig && \
+    mv ./srsenb/src/srsenb \
        ./srsepc/src/srsepc \
        ./srsepc/src/srsmbms \
        ./srsue/src/srsue \
@@ -71,9 +69,8 @@ RUN mv ./srsenb/src/srsenb \
 
 WORKDIR /srsran/srsRAN-release_${SRSRAN_VERSION}
 
-RUN mkdir -p /etc/srsran
-
-RUN find . -type f -name '*.example' -exec \
+RUN mkdir -p /etc/srsran && \
+    find . -type f -name '*.example' -exec \
     bash -c 'x={}; y=${x##*/}; z=${y%.example}; \
     cp {} /etc/srsran/${z}' \;
 
