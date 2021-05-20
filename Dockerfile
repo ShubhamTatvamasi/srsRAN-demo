@@ -32,6 +32,7 @@ RUN apt update && \
         clang-format-8 \
         libtool-bin \
         autoconf \
+        iperf3 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srsran

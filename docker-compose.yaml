@@ -9,14 +9,19 @@ services:
         ipv4_address: 172.50.50.10
     command:
       - srsenb
-      - --enb.mcc=505
-      - --enb.mnc=08
       - --enb.mme_addr=192.168.60.142
-      - --enb.gtp_bind_addr=192.168.60.1
-      - --enb.s1c_bind_addr=192.168.60.1
+      - --enb.gtp_bind_addr=172.50.50.10
+      - --enb.s1c_bind_addr=172.50.50.10
       - --rf.device_name=zmq
       - --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://localhost:2001,id=enb,base_srate=23.04e6"
 
+      # - --enb.mcc=001
+      # - --enb.mnc=01
+      # --enb.mme_addr  -> is the AGW ip for eth1    :run: ip a
+      # --enb.gtp_bind_addr & --enb.s1c_bind_addr : 
+      # gateway IP for the eNodeB interface
+
+      
   srsue:
     image: shubhamtatvamasi/srsran-demo
     container_name: srsue
@@ -27,13 +32,14 @@ services:
         ipv4_address: 172.50.50.11
     command:
       - srsue
-      - --gw.netns=ue1
       - --usim.algo=milenage
       - --usim.opc=63BFA50EE6523365FF14C1F45F88737D
-      - --usim.imsi=505080123456781
-      - --usim.imei=353490069873311
       - --rf.device_name=zmq
       - --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"
+
+      # - --usim.imsi=001010123456781
+      # - --usim.imei=353490069873311
+      # - --gw.netns=ue1
       # - --rf.dl_earfcn=37750
 
 networks:
