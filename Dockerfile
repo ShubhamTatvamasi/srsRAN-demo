@@ -33,6 +33,7 @@ RUN apt update && \
         libtool-bin \
         autoconf \
         iperf3 \
+        net-tools \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /srsran
