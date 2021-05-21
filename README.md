@@ -13,7 +13,7 @@ Get MME IP address from your AGW:
 ifconfig eth1 | grep 'inet ' | awk '{print $2}'
 ```
 
-Get the IP of AGW:
+Get **gtp_br0** IP of AGW:
 ```bash
 ifconfig gtp_br0 | grep 'inet ' | awk '{print $2}'
 ```
@@ -25,11 +25,16 @@ docker exec -it srsue ping 192.168.128.1
 
 For testing upload, ping Network attached IP of UE from AGW:
 ```bash
-ping 192.168.128.13
+ping 192.168.128.12
 ```
 ---
 
 ## Work in progress
 
+start server:
+```bash
+iperf3 -s
+```
 
+iperf3 -c 192.168.128.12
 
