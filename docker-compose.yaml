@@ -4,22 +4,21 @@ services:
   srsenb:
     image: shubhamtatvamasi/srsran-demo
     container_name: srsenb
+    network_mode: host
     cap_add:
       - SYS_NICE
-    networks:
-      srs_net:
-        ipv4_address: 172.50.50.10
     command:
       - srsenb
       - --enb.mme_addr=192.168.60.142
-      - --enb.gtp_bind_addr=172.50.50.10
-      - --enb.s1c_bind_addr=172.50.50.10
+      - --enb.gtp_bind_addr=192.168.60.1
+      - --enb.s1c_bind_addr=192.168.60.1
       - --rf.device_name=zmq
-      - --rf.device_args="fail_on_disconnect=true,tx_port=tcp://172.50.50.10:2000,rx_port=tcp://172.50.50.11:2001,id=enb,base_srate=23.04e6"
+      - --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://localhost:2001,id=enb,base_srate=23.04e6"
 
   srsue:
     image: shubhamtatvamasi/srsran-demo
     container_name: srsue
+    network_mode: host
     depends_on: 
       - srsenb
     cap_add:
@@ -27,19 +26,9 @@ services:
       - SYS_NICE
     devices:
       - /dev/net/tun
-    networks:
-      srs_net:
-        ipv4_address: 172.50.50.11
     command:
       - srsue
       - --usim.algo=milenage
       - --usim.opc=63BFA50EE6523365FF14C1F45F88737D
       - --rf.device_name=zmq
-      - --rf.device_args="tx_port=tcp://172.50.50.11:2001,rx_port=tcp://172.50.50.10:2000,id=ue,base_srate=23.04e6"
-
-networks:
-  srs_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.50.50.0/24"
+      - --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"

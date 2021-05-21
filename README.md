@@ -15,32 +15,21 @@ ifconfig eth1 | grep 'inet ' | awk '{print $2}'
 
 Get the IP of AGW:
 ```bash
-ifconfig eth2 | grep 'inet ' | awk '{print $2}'
+ifconfig gtp_br0 | grep 'inet ' | awk '{print $2}'
 ```
 
-For testing download, ping AGW from UE:
+For testing download, ping **gtp_br0** network of AGW from UE:
 ```bash
-docker exec -it srsue ping 192.168.129.1
+docker exec -it srsue ping 192.168.128.1
+```
+
+For testing upload, ping Network attached IP of UE from AGW:
+```bash
+ping 192.168.128.13
 ```
 ---
 
 ## Work in progress
 
-For testing upload, ping Network attached IP of UE from AGW:
-```bash
-ping 172.50.50.11
-```
-
-192.168.0.5
-docker exec -it srsue ping 192.168.128.21
-
----
-
-docker exec -it srsue ping 192.168.0.5
-
-
-
-docker exec -it srsue iperf3 -c 192.168.0.5 -f m
-iperf3 -s 192.168.0.5
 
 
