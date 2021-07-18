@@ -29,12 +29,30 @@ ping 192.168.128.12
 ```
 ---
 
-## Work in progress
+### iperf3 test
 
-start server:
+#### Upload
+
+Start iperf3 server inside AGW:
 ```bash
 iperf3 -s
 ```
 
-iperf3 -c 192.168.128.12
+Upload test from srsue docker container:
+```bash
+docker exec -it srsue iperf3 -c 192.168.60.142 -t 86400
+```
+> Change IP to Network attach IP
 
+#### Download
+
+Start iperf3 server inside srsue docker container:
+```bash
+docker exec -it srsue iperf3 -s
+```
+
+Download test from AGW:
+```bash
+iperf3 -c 192.168.128.12 -t 86400
+```
+> Change IP to Network attach IP
