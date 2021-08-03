@@ -56,3 +56,7 @@ Download test from AGW:
 iperf3 -c 192.168.128.12 -t 86400
 ```
 > Change IP to Network attach IP
+
+
+Ref: https://docs.srsran.com/en/latest/app_notes/source/zeromq/source/index.html
+
