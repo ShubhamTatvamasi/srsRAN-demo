@@ -57,6 +57,17 @@ iperf3 -c 192.168.128.12 -t 86400
 ```
 > Change IP to Network attach IP
 
+#### iperf3 loop
+
+Start iperf3 server inside AGW:
+```bash
+iperf3 -s
+```
+
+run loop inside srsRAN server:
+```bash
+./iperf3-loop.sh
+```
 ---
 
 ### Debug
