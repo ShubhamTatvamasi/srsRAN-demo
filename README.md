@@ -1,6 +1,6 @@
 # srsRAN-demo
 
-[![docker build](https://github.com/ShubhamTatvamasi/srsRAN-demo/actions/workflows/docker-build.yml/badge.svg?branch=master)](https://github.com/ShubhamTatvamasi/srsRAN-demo/actions/workflows/docker-build.yml)
+[![docker build](https://github.com/ShubhamTatvamasi/srsRAN-demo/actions/workflows/docker-build.yml/badge.svg)](https://github.com/ShubhamTatvamasi/srsRAN-demo/actions/workflows/docker-build.yml)
 [![Docker Image Version (latest semver)](https://img.shields.io/docker/v/shubhamtatvamasi/srsran-demo?sort=semver)](https://hub.docker.com/r/shubhamtatvamasi/srsran-demo)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/shubhamtatvamasi/srsran-demo/latest)](https://hub.docker.com/r/shubhamtatvamasi/srsran-demo)
 [![Docker Pulls](https://img.shields.io/docker/pulls/shubhamtatvamasi/srsran-demo)](https://hub.docker.com/r/shubhamtatvamasi/srsran-demo)
