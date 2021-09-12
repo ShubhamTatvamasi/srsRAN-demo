@@ -7,8 +7,7 @@ services:
     network_mode: host
     cap_add:
       - SYS_NICE
-    command: |
-      srsenb
+    command: srsenb
       --enb.mme_addr=192.168.60.142
       --enb.gtp_bind_addr=192.168.60.1
       --enb.s1c_bind_addr=192.168.60.1
@@ -26,8 +25,7 @@ services:
       - SYS_NICE
     devices:
       - /dev/net/tun
-    command: |
-      srsue
+    command: srsue
       --usim.algo=milenage
       --usim.imsi=001010000000001
       --usim.k=00112233445566778899aabbccddeeff
