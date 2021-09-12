@@ -24,7 +24,8 @@ RUN apt update && \
         libpcsclite-dev \
         libboost-program-options-dev \
         libconfig++-dev \
-        libsctp-dev libczmq-dev \
+        libsctp-dev \
+        libczmq-dev \
         libpcsclite-dev \
         rapidjson-dev \
         colordiff \
