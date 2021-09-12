@@ -7,13 +7,13 @@ services:
     network_mode: host
     cap_add:
       - SYS_NICE
-    command:
-      - srsenb
-      - --enb.mme_addr=192.168.60.142
-      - --enb.gtp_bind_addr=192.168.60.1
-      - --enb.s1c_bind_addr=192.168.60.1
-      - --rf.device_name=zmq
-      - --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://localhost:2001,id=enb,base_srate=23.04e6"
+    command: |
+      srsenb
+      --enb.mme_addr=192.168.60.142
+      --enb.gtp_bind_addr=192.168.60.1
+      --enb.s1c_bind_addr=192.168.60.1
+      --rf.device_name=zmq
+      --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://localhost:2001,id=enb,base_srate=23.04e6"
 
   srsue:
     image: shubhamtatvamasi/srsran-demo
@@ -26,11 +26,11 @@ services:
       - SYS_NICE
     devices:
       - /dev/net/tun
-    command:
-      - srsue
-      - --usim.algo=milenage
-      - --usim.imsi=001010000000001
-      - --usim.k=00112233445566778899aabbccddeeff
-      - --usim.opc=63BFA50EE6523365FF14C1F45F88737D
-      - --rf.device_name=zmq
-      - --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"
+    command: |
+      srsue
+      --usim.algo=milenage
+      --usim.imsi=001010000000001
+      --usim.k=00112233445566778899aabbccddeeff
+      --usim.opc=63BFA50EE6523365FF14C1F45F88737D
+      --rf.device_name=zmq
+      --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"
