@@ -3,43 +3,43 @@
   become: yes
   tasks:
 
-    - name: Install dependencies
-      apt:
-        name: "{{ packages }}"
-        update_cache: yes
-      vars:
-        packages:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - gnupg
-        - lsb-release
+  - name: Install dependencies
+    apt:
+      name: "{{ packages }}"
+      update_cache: yes
+    vars:
+      packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
 
-    - name: Add an apt signing key for Docker
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
+  - name: Add an apt signing key for Docker
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
 
-    - name: Add apt repository for stable version
-      apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+  - name: Add apt repository for stable version
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
 
-    - name: Install Docker
-      apt:
-        name: "{{ packages }}"
-        update_cache: yes
-      vars:
-        packages:
-        - docker-ce
-        - docker-ce-cli 
-        - containerd.io
+  - name: Install Docker
+    apt:
+      name: "{{ packages }}"
+      update_cache: yes
+    vars:
+      packages:
+      - docker-ce
+      - docker-ce-cli 
+      - containerd.io
 
-    - name: Add user to docker group
-      user:
-        name: "{{ansible_user}}"
-        group: docker
+  - name: Add user to docker group
+    user:
+      name: "{{ansible_user}}"
+      group: docker
 
-    - name: Download docker-compose {{ docker_compose_version }}
-      get_url:
-        url : https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-Linux-x86_64
-        dest: /usr/local/bin/docker-compose
-        mode: '+x'
+  - name: Download docker-compose {{ docker_compose_version }}
+    get_url:
+      url : https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: '+x'

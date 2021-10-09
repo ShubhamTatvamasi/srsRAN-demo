@@ -1,7 +1,7 @@
 - name: Install srsRAN
   hosts: all
   tasks:
-  - name: Installing srsRAN
-    become: yes
-    shell: |
-      docker pull shubhamtatvamasi/srsran-demo
+  - name: Create a data container
+    docker_container:
+      name: mydata
+      image: busybox
