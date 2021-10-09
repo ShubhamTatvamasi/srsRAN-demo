@@ -1,2 +1,2 @@
-ansible_user: "ubuntu"
+remote_user: "ubuntu"
 docker_compose_version: "2.0.1"
