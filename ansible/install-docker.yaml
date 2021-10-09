@@ -3,8 +3,6 @@
   become: yes
   tasks:
 
-    - include_vars: vars.yaml
-
     - name: Install dependencies
       apt:
         name: "{{ packages }}"
@@ -37,7 +35,7 @@
 
     - name: Add user to docker group
       user:
-        name: "{{remote_user}}"
+        name: "{{ansible_user}}"
         group: docker
 
     - name: Download docker-compose {{ docker_compose_version }}
