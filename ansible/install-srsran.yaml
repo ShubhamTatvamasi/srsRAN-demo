@@ -1,7 +1,9 @@
 - name: Install srsRAN
   hosts: all
+  become: yes
   tasks:
-  - name: Create a data container
+
+  - name: Create nginx container
     docker_container:
-      name: mydata
-      image: busybox
+      name: nginx
+      image: nginx:alpine
