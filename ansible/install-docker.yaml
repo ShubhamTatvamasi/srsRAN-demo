@@ -1,10 +1,9 @@
 - name: Install Docker and docker-compose
   hosts: all
   become: yes
-  vars:
-    ansible_user: "ubuntu"
-    docker_compose_version: "2.0.1"
   tasks:
+
+    - include_vars: vars.yaml
 
     - name: Install dependencies
       apt:
