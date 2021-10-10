@@ -1,4 +1,4 @@
-- name: Install Docker and docker-compose
+- name: Install Docker
   hosts: all
   become: yes
   tasks:
@@ -38,13 +38,7 @@
       name: "{{ ansible_user }}"
       group: docker
 
-  - name: Download docker-compose {{ docker_compose_version }}
-    get_url:
-      url : https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-Linux-x86_64
-      dest: /usr/local/bin/docker-compose
-      mode: '+x'
-
-  - name: Install pip
+  - name: Install pip package
     apt:
       update_cache: yes
       name: python3-pip
