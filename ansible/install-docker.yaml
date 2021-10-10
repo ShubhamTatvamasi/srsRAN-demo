@@ -33,9 +33,9 @@
       - docker-ce-cli 
       - containerd.io
 
-  - name: Add {{ansible_user}} user to docker group
+  - name: Add {{ ansible_user }} user to docker group
     user:
-      name: "{{ansible_user}}"
+      name: "{{ ansible_user }}"
       group: docker
 
   - name: Download docker-compose {{ docker_compose_version }}

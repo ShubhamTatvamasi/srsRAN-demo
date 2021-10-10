@@ -12,13 +12,36 @@
     pip:
       name: docker
 
-  # - name: Pull busybox image
-  #   community.docker.docker_image:
-  #     name: busybox
-  #     source: pull
+  - name: Create srsenb container
+    community.docker.docker_container:
+      name: srsenb
+      image: shubhamtatvamasi/srsran-demo
+      container_default_behavior: compatibility
+      network_mode: host
+      capabilities:
+        - SYS_NICE
+      command: srsenb
+        --enb.mme_addr={{ mme_addr }}
+        --enb.gtp_bind_addr={{ bind_addr }}
+        --enb.s1c_bind_addr={{ bind_addr }}
+        --rf.device_name=zmq
+        --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://localhost:2001,id=enb,base_srate=23.04e6"
 
-  # - name: Create nginx container
-  #   community.docker.docker_container:
-  #     name: nginx
-  #     container_default_behavior: compatibility
-  #     image: nginx:alpine
+  - name: Create srsue container
+    community.docker.docker_container:
+      name: srsue
+      image: shubhamtatvamasi/srsran-demo
+      container_default_behavior: compatibility
+      network_mode: host
+      capabilities:
+        - NET_ADMIN
+        - SYS_NICE
+      devices:
+        - /dev/net/tun
+      command: srsue
+        --usim.algo=milenage
+        --usim.imsi={{ imsi }}
+        --usim.k={{ k }}
+        --usim.opc={{ opc }}
+        --rf.device_name=zmq
+        --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"
