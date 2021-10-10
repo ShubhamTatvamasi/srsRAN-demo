@@ -3,15 +3,6 @@
   become: yes
   tasks:
 
-  - name: Install pip
-    apt:
-      update_cache: yes
-      name: python3-pip
-
-  - name: Install docker python package
-    pip:
-      name: docker
-
   - name: Create srsenb container
     community.docker.docker_container:
       name: srsenb

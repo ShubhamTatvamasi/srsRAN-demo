@@ -43,3 +43,12 @@
       url : https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-Linux-x86_64
       dest: /usr/local/bin/docker-compose
       mode: '+x'
+
+  - name: Install pip
+    apt:
+      update_cache: yes
+      name: python3-pip
+
+  - name: Install docker python package
+    pip:
+      name: docker
