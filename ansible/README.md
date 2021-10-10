@@ -5,9 +5,8 @@ download docker module:
 ansible-galaxy collection install community.docker
 ```
 
-Install docker:
+Install docker with srsRAN:
 ```bash
-ansible-playbook install-docker.yaml
-ansible-playbook install-srsran.yaml
+ansible-playbook install-everything.yaml
 ```
 

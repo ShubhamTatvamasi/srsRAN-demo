@@ -3,7 +3,22 @@
   become: yes
   tasks:
 
-  - name: Create nginx container
-    docker_container:
-      name: nginx
-      image: nginx:alpine
+  - name: Install pip
+    apt:
+      update_cache: yes
+      name: python3-pip
+
+  - name: Install docker python package
+    pip:
+      name: docker
+
+  # - name: Pull busybox image
+  #   community.docker.docker_image:
+  #     name: busybox
+  #     source: pull
+
+  # - name: Create nginx container
+  #   community.docker.docker_container:
+  #     name: nginx
+  #     container_default_behavior: compatibility
+  #     image: nginx:alpine
