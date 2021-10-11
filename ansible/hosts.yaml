@@ -5,6 +5,7 @@ all:
     ansible_user: "ubuntu"
     mme_addr: "192.168.5.57"
     bind_addr: "192.168.5.59"
+    docker_image: "shubhamtatvamasi/srsran-demo"
     imsi: "001010000000001"
     k: "00112233445566778899aabbccddeeff"
     opc: "63BFA50EE6523365FF14C1F45F88737D"
