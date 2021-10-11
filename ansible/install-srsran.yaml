@@ -6,7 +6,7 @@
   - name: Create srsenb container
     community.docker.docker_container:
       name: srsenb
-      image: {{ docker_image }}
+      image: "{{ docker_image }}"
       container_default_behavior: compatibility
       network_mode: host
       capabilities:
@@ -21,7 +21,7 @@
   - name: Create srsue container
     community.docker.docker_container:
       name: srsue
-      image: {{ docker_image }}
+      image: "{{ docker_image }}"
       container_default_behavior: compatibility
       network_mode: host
       capabilities:
