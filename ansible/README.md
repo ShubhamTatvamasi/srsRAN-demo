@@ -28,7 +28,7 @@ Variables | Notes
 ---|---
 hosts | IP of the server where we have to deploy srsRAN.
 ansible_user | Username of server machine.
-mme_addr | MME IP of Magma's Access Gateway.
+mme_addr | MME IP of Magma's Access Gateway. (IP of eth1 interface from Magma Access Gateway)
 bind_addr | This should be your interface IP that will be used to communicate with MME. (this should not be floating ip)
 
 ---
