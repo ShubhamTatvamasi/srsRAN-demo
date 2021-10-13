@@ -49,3 +49,10 @@ Install srsRAN with docker:
 ansible-playbook install-everything.yaml
 ```
 
+### Verify setup
+
+Go to the server and check if network is connected:
+```bash
+docker logs srsue -f
+```
+
