@@ -51,7 +51,7 @@ ansible-playbook install-everything.yaml
 
 ### Verify setup
 
-Go to the server and check if network is connected:
+Go to the server and check if network is attached:
 ```bash
 docker logs srsue -f
 ```
