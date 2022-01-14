@@ -9,6 +9,10 @@
 
 This demo allows you to deploy an srsRAN installation within a Vagrant VM to send test traffic through to your Magma AGW.
 
+```diff
+- Note: Build fresh docker image on your system it's official image is crashing for you. 
+```
+
 **Prerequisites**
 
 1. You already have a Magma AGW and Orchestrator running and have access to the NMS in order to make changes. This will include installing many other dependencies, some of which will be used in this demo.
