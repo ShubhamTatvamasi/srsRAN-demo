@@ -296,7 +296,10 @@ run loop inside srsRAN server:
 
 packet capture:
 ```bash
+# capture all packets
 sudo tcpdump -i any -w srs_attach.pcap
+# capture packets for the MME host
+sudo tcpdump host 192.168.5.92 -i any -w srs_attach.pcap
 ```
 
 Ref: https://docs.srsran.com/en/latest/app_notes/source/zeromq/source/index.html
