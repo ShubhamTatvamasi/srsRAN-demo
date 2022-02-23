@@ -1,6 +1,5 @@
 all:
-  hosts:
-    192.168.60.171
+  hosts: 192.168.60.171
   vars:
     ansible_user: "vagrant"
     mme_addr: "192.168.60.142"
