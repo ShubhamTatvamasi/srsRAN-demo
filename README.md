@@ -296,6 +296,8 @@ run loop inside srsRAN server:
 
 packet capture:
 ```bash
+# capture packets for eth1 interface
+sudo tcpdump -i eth1
 # capture all packets
 sudo tcpdump -i any -w srs_attach.pcap
 # capture packets for the MME host
