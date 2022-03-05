@@ -11,6 +11,8 @@ This demo allows you to deploy an srsRAN installation within a Vagrant VM to sen
 
 ```diff
 - NOTE: Build fresh docker image on your system if official image is crashing for you.
+
+docker build -t srsran .
 ```
 
 **Prerequisites**
