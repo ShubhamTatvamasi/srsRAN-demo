@@ -1,2 +1,2 @@
 - import_playbook: install-docker.yaml
-- import_playbook: start-srsran.yaml
+- import_playbook: install-srsran.yaml
