@@ -16,6 +16,7 @@ RUN apt update && \
         wget \
         curl \
         vim \
+        ripgrep \
         iptables \
         iproute2 \
         iputils-ping \
