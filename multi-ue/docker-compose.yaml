@@ -1,0 +1,61 @@
+version: "3.9"
+
+x-srsue: &default-ue
+  image: shubhamtatvamasi/srsran-demo
+  network_mode: host
+  depends_on:
+    - srsenb
+  cap_add:
+    - NET_ADMIN
+    - SYS_NICE
+  devices:
+    - /dev/net/tun
+
+x-srsenb: &default-enb
+  image: shubhamtatvamasi/srsran-demo
+  network_mode: host
+  cap_add:
+    - SYS_NICE
+
+services:
+  enb-1:
+    <<: *default-enb
+    container_name: enb-1
+    command: srsenb
+      --enb.mme_addr=172.16.4.131
+      --enb.gtp_bind_addr=172.16.4.148
+      --enb.s1c_bind_addr=172.16.4.148
+      --rf.device_name=zmq
+      --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://localhost:2001,id=enb,base_srate=23.04e6"
+
+  ue-1:
+    <<: *default-ue
+    container_name: ue-1
+    depends_on:
+      - enb-1
+    command: srsue
+      --usim.imsi=001010000000001
+      --gw.ip_devname=tun_srsue_1
+      --rf.device_name=zmq
+      --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"
+
+  enb-2:
+    <<: *default-enb
+    container_name: enb-2
+    command: srsenb
+      --enb.mme_addr=172.16.4.131
+      --enb.gtp_bind_addr=172.16.4.148
+      --enb.s1c_bind_addr=172.16.4.148
+      --rf.device_name=zmq
+      --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2002,rx_port=tcp://localhost:2003,id=enb,base_srate=23.04e6"
+
+  ue-2:
+    <<: *default-ue
+    container_name: ue-2
+    depends_on:
+      - enb-2
+    command: srsue
+      --usim.imsi=001010000000002
+      --gw.ip_devname=tun_srsue_2
+      --rf.device_name=zmq
+      --rf.device_args="tx_port=tcp://*:2003,rx_port=tcp://localhost:2002,id=ue,base_srate=23.04e6"
