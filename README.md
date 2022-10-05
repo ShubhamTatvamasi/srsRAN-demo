@@ -14,6 +14,10 @@ This demo allows you to deploy an srsRAN installation within a Vagrant VM to sen
 
 docker build -t srsran .
 docker tag srsran shubhamtatvamasi/srsran-demo
+
+# Tag and push
+docker tag srsran shubhamtatvamasi/srsran-demo:$(uname -r)
+docker push shubhamtatvamasi/srsran-demo:$(uname -r)
 ```
 
 **Prerequisites**
