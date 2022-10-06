@@ -1,0 +1,4 @@
+---
+- import_tasks: set-architecture.yml
+- import_tasks: install-docker.yml
+  become: yes

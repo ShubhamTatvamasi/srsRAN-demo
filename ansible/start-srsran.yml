@@ -1,0 +1,5 @@
+---
+- name: Start srsRAN
+  hosts: all
+  roles:
+    - role: srsran

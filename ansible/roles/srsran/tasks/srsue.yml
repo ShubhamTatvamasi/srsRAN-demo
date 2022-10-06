@@ -1,0 +1,18 @@
+---
+- name: Create srsue container
+  community.docker.docker_container:
+    name: srsue
+    image: "{{ docker_image }}"
+    container_default_behavior: compatibility
+    network_mode: host
+    capabilities:
+      - NET_ADMIN
+      - SYS_NICE
+    devices:
+      - /dev/net/tun
+    command: srsue
+      --usim.imsi={{ imsi }}
+      --usim.k={{ k }}
+      --usim.opc={{ opc }}
+      --rf.device_name=zmq
+      --rf.device_args="tx_port=tcp://*:2001,rx_port=tcp://localhost:2000,id=ue,base_srate=23.04e6"

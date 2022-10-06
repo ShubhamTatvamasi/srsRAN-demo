@@ -1,0 +1,15 @@
+---
+- name: Create srsenb container
+  community.docker.docker_container:
+    name: srsenb
+    image: "{{ docker_image }}"
+    container_default_behavior: compatibility
+    network_mode: host
+    capabilities:
+      - SYS_NICE
+    command: srsenb
+      --enb.mme_addr={{ mme_addr }}
+      --enb.gtp_bind_addr={{ ansible_host }}
+      --enb.s1c_bind_addr={{ ansible_host }}
+      --rf.device_name=zmq
+      --rf.device_args="fail_on_disconnect=true,tx_port=tcp://*:2000,rx_port=tcp://localhost:2001,id=enb,base_srate=23.04e6"
