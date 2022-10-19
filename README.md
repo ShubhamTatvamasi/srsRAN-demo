@@ -150,7 +150,8 @@ Now we can use Ansible to install Docker within the Vagrant VM, build the srsRAN
 Install Docker and srsRAN on the srsRAN Vagrant VM with Ansible:
 
 ```bash
-ansible-playbook install-everything.yaml
+ansible-playbook install-docker.yml
+ansible-playbook start-srsran.yml
 ```
 
 This should automatically start the process of connecting to your AGW with one of the UEs.
