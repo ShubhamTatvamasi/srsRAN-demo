@@ -141,7 +141,7 @@ docker_image | Depending on your processor you may have to rebuild docker image.
 
 ---
 
-With these values edited as needed, make sure to save the `hosts.yaml` file.
+With these values edited as needed, make sure to save the `hosts.yml` file.
 
 ### Deploy srsRAN
 
