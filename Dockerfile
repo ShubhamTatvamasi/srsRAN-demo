@@ -31,7 +31,7 @@ RUN apt update && \
         rapidjson-dev \
         colordiff \
         ninja-build \
-        clang-format-11 \
+        clang-format-14 \
         libtool-bin \
         autoconf \
         iperf3 \
