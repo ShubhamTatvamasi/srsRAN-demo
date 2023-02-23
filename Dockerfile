@@ -40,7 +40,7 @@ RUN apt update && \
 
 WORKDIR /srsran
 
-RUN wget https://github.com/srsran/srsRAN/archive/refs/tags/release_${SRSRAN_VERSION}.zip && \
+RUN wget https://github.com/srsran/srsRAN_4G/archive/refs/tags/release_${SRSRAN_VERSION}.zip && \
     wget https://github.com/zeromq/libzmq/archive/refs/tags/v${LIBZMQ_VERSION}.zip && \
     wget https://github.com/zeromq/czmq/archive/refs/tags/v${CZMQ_VERSION}.zip && \
     unzip release_${SRSRAN_VERSION}.zip && \
