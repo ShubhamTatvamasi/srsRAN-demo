@@ -64,7 +64,7 @@ RUN ./autogen.sh && \
     make install && \
     ldconfig
 
-WORKDIR /srsran/srsRAN-release_${SRSRAN_VERSION}/build
+WORKDIR /srsran/srsRAN_4G-release_${SRSRAN_VERSION}/build
 
 RUN cmake .. && \
     make && \
